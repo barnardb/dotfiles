@@ -1,0 +1,4 @@
+set bell-style visible
+set colored-stats On
+set page-completions Off
+set show-all-if-ambiguous On

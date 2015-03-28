@@ -1,0 +1,37 @@
+[alias]
+	ci = commit --verbose
+	co = checkout
+	f = !"f() { if [ -d .git/svn ]; then git svn fetch \"$@\"; else git fetch \"$@\"; fi; }; f"
+	ignored = ls-files --other --ignored --exclude-standard
+	local = !"if [ -d .git/svn ]; then git log git-svn..; else git log @{upstream}..; fi"
+	new = ls-files --others --exclude-standard
+	pr = !"pr() { if [ -d .git/svn ]; then git svn fetch && git svn rebase; elif grep -q remote .git/config; then git pull --rebase \"$@\"; else echo 'No remote: nothing to do'; fi; }; pr"
+	push-no-hook = !"pushNoHook() { if [ -e .git/hooks/pre-push ]; then mv .git/hooks/pre-push .git/hooks/pre-push-disabled-by-alias && { git push \"$@\"; mv .git/hooks/pre-push-disabled-by-alias .git/hooks/pre-push; } else git push \"$@\"; fi; }; pushNoHook"
+	r = rebase
+	rc = rebase --continue
+	ri = rebase --interactive
+	st = status
+	serve = daemon --reuseaddr --verbose --base-path=. --export-all ./.git
+	svn-diff = !"TRACKING_BRANCH=$(git config --get svn-remote.svn.fetch | sed -e 's/.*:refs\\/remotes\\///'); REV=$(git svn find-rev $TRACKING_BRANCH); git diff --no-prefix $TRACKING_BRANCH \"$@\" | sed -e 's/^+++ .*/&\t(working copy)/' -e \"s/^--- .*/&\t(revision $REV)/\" -e 's/^diff --git [^[:space:]]*/Index:/' -e 's/^index.*/===================================================================/'"
+	with-stash = !"set -euo pipefail; changes=\"$(git status -z)\"; if [ -n \"${changes}\" ]; then echo 'Changes detected: stashing'; git stash; trap 'echo && echo Unstaging && git stash pop' EXIT; else echo 'No changes: proceeding without stash'; fi; echo;"
+[branch]
+	autosetuprebase = always
+[color]
+	ui = auto
+[core]
+	excludesfile = /Users/bebarnar/.gitignore-global
+	precomposeunicode = true
+	quotepath = false
+[credential]
+	helper = osxkeychain
+[push]
+	default = upstream
+[user]
+	name = 
+	email = 
+[difftool "sourcetree"]
+	cmd = opendiff \"$LOCAL\" \"$REMOTE\"
+	path = 
+[mergetool "sourcetree"]
+	cmd = /opt/homebrew-cask/Caskroom/sourcetree/2.0.5.2/SourceTree.app/Contents/Resources/opendiff-w.sh \"$LOCAL\" \"$REMOTE\" -ancestor \"$BASE\" -merge \"$MERGED\"
+	trustExitCode = true

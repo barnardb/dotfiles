@@ -1,0 +1,10 @@
+# MacOS X
+.DS_Store
+
+# IntelliJ
+.idea/
+*.iml
+
+# VIM
+.*.swp
+.swp
