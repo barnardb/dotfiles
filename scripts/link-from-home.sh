@@ -13,7 +13,7 @@ home_file="$HOME/${contentless_file}"
 home_parent="$(dirname "${home_file}")"
 original_relative_to_home_parent="$(python -c "import os.path; print os.path.relpath('${file}', '${home_parent}')")"
 
-if [ -h ${home_file} ]; then
+if [ -h "${home_file}" ]; then
     current_path="$(readlink "${home_file}")"
     [ "${current_path}" = "${original_relative_to_home_parent}" ] || error "cannot link ${home_file} to ${original_relative_to_home_parent} because it is already linked to ${current_path}"
 else

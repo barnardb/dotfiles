@@ -1,6 +1,7 @@
 
 # Java & Scala fun time
-export JAVA_HOME="$(/usr/libexec/java_home --failfast)"
+export JAVA_HOME
+JAVA_HOME="$(/usr/libexec/java_home --failfast)"
 [ $? -eq 0 ] || echo "ERROR while trying to set JAVA_HOME" >&2
 export SBT_OPTS="-Dfile.encoding=UTF8 -XX:+CMSClassUnloadingEnabled -XX:MaxPermSize=256m" #-Xmx2G -XX:ReservedCodeCacheSize=128m -Dscalac.patmat.analysisBudget=512"
 

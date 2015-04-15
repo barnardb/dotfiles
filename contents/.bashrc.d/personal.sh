@@ -7,8 +7,12 @@ shopt -s no_empty_cmd_completion
 
 function setWindowTitle {
     # Escape backslashes, unless we're trying to display \W (working dir in PS1)
-    local title=$(printf %s "$*" | sed 's/\\/\\\\/g' | head -n 1)
-    [ "$*" = '\W' ] && title="$*" ||:
+    local title
+    if [ "$*" = "\W" ]; then
+        title="$*"
+    else
+        title="$(printf %s "$*" | sed 's/\\/\\\\/g' | head -n 1)"
+    fi
     echo -en "\033]0;$title\007"
 }
 setWindowTitle "loading..."
@@ -56,7 +60,7 @@ function announce {
         exit_status=0
         "$@" || exit_status=$?
     fi
-    nohup say -v anna "$([ $exit_status -eq 0 ] && printf "Erfolgreich abgeschlossen" || printf "Fehlerstatus %s" $exit_status)" &>/dev/null &
+    nohup say -v anna "$(if [ "${exit_status}" -eq 0 ]; then printf "Erfolgreich abgeschlossen"; else printf "Fehlerstatus %s" "${exit_status}"; fi)" &>/dev/null &
     #say "$([$exit_status -eq 0] && printf "Success" || printf "Failure, exit status %s" $exit_status)" &
     return $exit_status
 }
