@@ -3,7 +3,7 @@
 	co = checkout
 	f = !"f() { if [ -d .git/svn ]; then git svn fetch \"$@\"; else git fetch \"$@\"; fi; }; f"
 	ignored = ls-files --other --ignored --exclude-standard
-	local = !"if [ -d .git/svn ]; then git log git-svn..; else git log @{upstream}..; fi"
+	local = !"git log \"$([ -d .git/svn ] && echo git-svn || echo @{upstream})..\""
 	new = ls-files --others --exclude-standard
 	pr = !"pr() { if [ -d .git/svn ]; then git svn fetch && git svn rebase; elif grep -q remote .git/config; then git pull --rebase \"$@\"; else echo 'No remote: nothing to do'; fi; }; pr"
 	push-no-hook = !"pushNoHook() { if [ -e .git/hooks/pre-push ]; then mv .git/hooks/pre-push .git/hooks/pre-push-disabled-by-alias && { git push \"$@\"; mv .git/hooks/pre-push-disabled-by-alias .git/hooks/pre-push; } else git push \"$@\"; fi; }; pushNoHook"
