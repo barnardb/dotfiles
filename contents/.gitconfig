@@ -10,8 +10,8 @@
 	r = rebase
 	rc = rebase --continue
 	ri = rebase --interactive
-	st = status
 	serve = daemon --reuseaddr --verbose --base-path=. --export-all ./.git
+	st = status
 	svn-diff = !"TRACKING_BRANCH=$(git config --get svn-remote.svn.fetch | sed -e 's/.*:refs\\/remotes\\///'); REV=$(git svn find-rev $TRACKING_BRANCH); git diff --no-prefix $TRACKING_BRANCH \"$@\" | sed -e 's/^+++ .*/&\t(working copy)/' -e \"s/^--- .*/&\t(revision $REV)/\" -e 's/^diff --git [^[:space:]]*/Index:/' -e 's/^index.*/===================================================================/'"
 	with-stash = !"set -euo pipefail; changes=\"$(git status -z)\"; if [ -n \"${changes}\" ]; then echo 'Changes detected: stashing'; git stash; trap 'echo && echo Unstaging && git stash pop' EXIT; else echo 'No changes: proceeding without stash'; fi; echo;"
 [branch]
