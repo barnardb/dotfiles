@@ -45,3 +45,6 @@ export CLICOLOR=1
 
 alias l="ls"
 alias ll='ls -la'
+
+
+if which rbenv > /dev/null; then eval "$(rbenv init -)"; fi

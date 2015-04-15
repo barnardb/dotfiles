@@ -27,4 +27,5 @@
 [push]
 	default = upstream
 [user]
+	email = barnardb@gmail.com
 	name = Ben Barnard
