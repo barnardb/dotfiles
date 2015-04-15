@@ -15,22 +15,9 @@ export PATH="$HOME/bin:$PATH"
 # Add DevAut to PATH
 export PATH="$PATH:$HOME/personal/devaut/src/main/bash"
 
-# Add homebrew sbin dir to PATH
-export PATH="$PATH:/usr/local/sbin"
-
-# Add homebrew npm bin dir to PATH
-export PATH="$PATH:/usr/local/share/npm/bin"
-
-
-
-# Have Homebrew use the global application directory instead of ~/Applications
-export HOMEBREW_CASK_OPTS="--appdir=/Applications"
-
-
 
 # Prevent less from storing state in a home directory dot-file
 export LESSHISTFILE=/dev/null
-
 
 
 # Use vim
