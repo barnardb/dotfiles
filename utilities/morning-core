@@ -1,0 +1,45 @@
+#!/bin/bash
+set -euo pipefail
+
+echo "Getting your weather forcast"
+weather
+
+echo "Getting your upcoming events"
+cd "$HOME/psg/pony-calendar"
+    bundle exec ./pony-calendar.rb
+cd -
+echo
+
+echo "Checking for brew updates"
+brew up --rebase
+echo "Checking in with the brew doctor"
+if [ -f ~/.accepted-brew-doctor-output ]; then
+    diff ~/.accepted-brew-doctor-output <(brew doctor 2>&1)
+else
+    brew doctor
+fi
+outdated="$(brew outdated)"
+if [ -n "${outdated}" ]; then
+    echo
+    echo "Outdated packages:"
+    brew outdated
+    read -p "Upgrade these packages? "
+    if [ "${REPLY}" = "yes" ] || [ "${REPLY}" = "y" ] || [ "${REPLY}" = "" ]; then
+        brew upgrade
+    fi
+fi
+
+echo "Checking in with the brew cask doctor"
+brew cask doctor
+
+echo "Cleaning up brew"
+brew cleanup --scrub
+
+echo "Cleaning up brew cask"
+brew cask cleanup
+
+# echo "Updating cabal"
+# cabal update
+
+echo "Testing connections to configured SSH hosts"
+test-ssh-configuration
