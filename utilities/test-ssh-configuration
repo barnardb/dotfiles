@@ -1,0 +1,35 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+[ $# -eq 1 ] || {
+    echo "usage: $0 <ssh-config-file-section-name>"
+    exit 1
+} >&2
+
+hosts="$(sed -nE \
+    -e "1,/#### $1/d" \
+    -e '/####/,$d' \
+    -e "s/^Host //p" \
+    ~/.ssh/config \
+    | tr ' ' '\n')"
+echo "hosts=$hosts"
+hostsToTest="$(grep -vE \
+    -e "\\*" \
+    -e "github\\.com" \
+    <<<"$hosts" \
+    | sort | uniq)"
+echo "hostsToTest=$hostsToTest"
+
+check_host() {
+    local start end elapsed hostname
+    start="$(date +%s)"
+    hostname="$(ssh -o BatchMode=yes -o ConnectTimeout=10 -T "$1" echo '"$(hostname)"' 2>&1)" && exit_status=0 || exit_status=$?
+    end="$(date +%s)"
+    elapsed=$((${end} - ${start}))
+    { [ "${exit_status}" == 0 ] || [ "${exit_status}" == 1 ]; } && exit_status=0 || printf 'ERROR: '
+    echo "${elapsed}s $1 → ${hostname}"
+    exit "${exit_status}"
+}
+export -f check_host
+
+exec parallel -j0 --gnu check_host {} ::: ${hostsToTest}
