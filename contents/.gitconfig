@@ -4,6 +4,10 @@
 	co = checkout
 	f = !"f() { if [ -d .git/svn ]; then git svn fetch \"$@\"; else git fetch \"$@\"; fi; }; f"
 	ignored = ls-files --other --ignored --exclude-standard
+	ll = log --graph --abbrev-commit --decorate       --date=relative --format=format:'%C(bold blue)%h%C(reset) - %C(bold green)(%ar)%C(reset) %C(white)%s%C(reset) %C(dim white)- %an%C(reset)%C(bold yellow)%d%C(reset)' --all
+	lg = log --graph --abbrev-commit --decorate       --date=relative --format=format:'%C(bold blue)%h%C(reset) - %C(bold green)(%ar)%C(reset) %C(white)%s%C(reset) %C(dim white)- %an%C(reset)%C(bold yellow)%d%C(reset)' --all
+	lx = log --graph                 --decorate=short --color         --format=format:'%C(bold blue)%h%C(reset)+%C(bold black)(%cr)%C(reset)+%C(auto)%d%C(reset)++\n+++       %C(bold black)%an%C(reset)%C(bold black): %s%C(reset)' --all
+	lt = log --graph                 --decorate=short --color         --format=format:'%C(bold blue)%h%C(reset) %C(auto)%d%C(reset)\n         %C(bold black)[%cr]%C(reset)  %x09%C(bold black)%an: %s %C(reset)' --all
 	local = !"git log \"$([ -d .git/svn ] && echo git-svn || echo @{upstream})..\""
 	new = ls-files --others --exclude-standard
 	pr = !"pr() { if [ -d .git/svn ]; then git svn fetch && git svn rebase; elif grep -q remote .git/config; then git pull --rebase \"$@\"; else echo 'No remote: nothing to do'; fi; }; pr"
