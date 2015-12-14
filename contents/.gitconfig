@@ -1,4 +1,5 @@
 [alias]
+	cap = commit --amend --patch --no-edit --no-verify
 	ci = commit --verbose
 	co = checkout
 	f = !"f() { if [ -d .git/svn ]; then git svn fetch \"$@\"; else git fetch \"$@\"; fi; }; f"
