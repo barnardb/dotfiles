@@ -1,6 +1,6 @@
 
-# Add personal bin as first in PATH
-export PATH="$HOME/bin:$PATH"
+# Add utilities to the PATH
+export PATH="$PATH:$HOME/personal/dotfiles/utilities"
 
 # Add DevAut to PATH
 export PATH="$PATH:$HOME/personal/devaut/src/main/bash"
