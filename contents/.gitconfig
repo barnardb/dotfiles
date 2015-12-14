@@ -11,6 +11,7 @@
 	r = rebase
 	rc = rebase --continue
 	ri = rebase --interactive
+	s = status
 	serve = daemon --reuseaddr --verbose --base-path=. --export-all ./.git
 	st = status
 	svn-diff = !"TRACKING_BRANCH=$(git config --get svn-remote.svn.fetch | sed -e 's/.*:refs\\/remotes\\///'); REV=$(git svn find-rev $TRACKING_BRANCH); git diff --no-prefix $TRACKING_BRANCH \"$@\" | sed -e 's/^+++ .*/&\t(working copy)/' -e \"s/^--- .*/&\t(revision $REV)/\" -e 's/^diff --git [^[:space:]]*/Index:/' -e 's/^index.*/===================================================================/'"
