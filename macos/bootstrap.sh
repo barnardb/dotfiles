@@ -5,7 +5,7 @@ set -x
 # Computer Name
 computer_name="$(scutil --get ComputerName)"
 read -er -p "Give this computer a name [${computer_name}]: "
-[ -e "$REPLY" ] || {
+[ -z "$REPLY" ] || {
     computer_name="$REPLY"
     sudo systemsetup -setcomputername "${computer_name}"
     sudo systemsetup -setlocalsubnetname "${computer_name}"
