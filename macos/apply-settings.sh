@@ -4,14 +4,6 @@ set -x
 
 
 
-# Computer Name
-# =============
-
-# sudo systemsetup -setcomputername "${computer_name}"
-# sudo systemsetup -setlocalsubnetname "${computer_name}"
-
-
-
 # Trackpad
 # ========
 
@@ -40,6 +32,8 @@ defaults write NSGlobalDomain AppleKeyboardUIMode -int 3
 
 # Operating System
 # ================
+
+# TODO: See datetimes like "Fri 15 Dec 16:29" in the status bar
 
 # Require password immediately after sleep or screen saver begins
 defaults write com.apple.screensaver askForPassword -int 1
