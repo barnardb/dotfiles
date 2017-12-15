@@ -130,6 +130,8 @@ brew install golang
 brew install graphviz
 brew install node.js
 brew install rust
+
+brew cask install java
 brew install sbt
 brew install scala
 
