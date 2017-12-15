@@ -16,7 +16,7 @@ read -er -p "Give this computer a name [${computer_name}]: "
     echo "SSH key not found. Let's generate one and upload it to GitHub."
     read -er -p "GitHub username [$USER]: "
     [ -n "$REPLY" ] || REPLY="$USER"
-    ssh-keygen -t rsa -b 4096
+    ssh-keygen -t rsa -b 4096 -f ~/.ssh/id_rsa
     curl --fail --include --user "$REPLY" -p -d "{\"title\":\"$USER@${computer_name}\", \"key\":\"$(cat ~/.ssh/id_rsa.pub)\"}" https://api.github.com/user/keys
 }
 
