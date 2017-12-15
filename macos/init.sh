@@ -35,7 +35,7 @@ brew cask doctor
 # ==============
 
 echo "Applying Mac OS settings"
-"$(dirname "$0")/apply-macos-settings.sh"
+"$(dirname "$0")/apply-settings.sh"
 
 
 

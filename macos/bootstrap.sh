@@ -29,8 +29,8 @@ brew install git
 hash -r  # make the current shell forget old executable locations, so it finds new git
 
 # Clone dotfiles repo
-cd ~
-mkdir -p personal
+mkdir -p ~/personal
+cd ~/personal
 -d dotfiles/.git || git clone git@github.com:barnardb/dotfiles.git
 
 # Run init script
