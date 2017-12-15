@@ -4,17 +4,20 @@ set -x
 
 # Computer Name
 computer_name="$(scutil --get ComputerName)"
-read -er -p "Give this computer a name: " -i "${computer_name}"
-computer_name="$REPLY"
-sudo systemsetup -setcomputername "${computer_name}"
-sudo systemsetup -setlocalsubnetname "${computer_name}"
+read -er -p "Give this computer a name [${computer_name}]: "
+[ -e "$REPLY" ] || {
+    computer_name="$REPLY"
+    sudo systemsetup -setcomputername "${computer_name}"
+    sudo systemsetup -setlocalsubnetname "${computer_name}"
+}
 
 # SSH Key
 -f ~/.ssh/id_rsa || {
     echo "SSH key not found. Let's generate one and upload it to GitHub."
-    read -er -p "GitHub username: " -i "$USER"
+    read -er -p "GitHub username[$USER]: "
+    [ -n "$REPLY" ] || REPLY="$USER"
     ssh-keygen -t rsa -b 4096
-    curl -i -u username -d "{\"title\":\"$USER@${computer_name}\", \"key\":\"$(cat ~/.ssh/id_rsa)\"}" https://api.github.com/user/keys
+    curl -i -u "$REPLY" -d "{\"title\":\"$USER@${computer_name}\", \"key\":\"$(cat ~/.ssh/id_rsa)\"}" https://api.github.com/user/keys
 }
 
 # Homebrew
