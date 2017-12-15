@@ -44,15 +44,18 @@ echo "Applying Mac OS settings"
 
 # Flux
 brew cask install flux
+sleep 1
 open -a Flux
 
 # Spectacle
 brew cask install Spectacle
 # TODO: restore spectacle settings
+sleep 1
 open -a Spectacle
 
 # Caffeine
 brew cask install caffeine
+sleep 1
 open -a Caffeine
 
 
@@ -75,6 +78,7 @@ sudo chsh -s /usr/local/bin/bash "$USER"
 
 # ITerm2
 brew cask install iterm2
+sleep 1
 open -a iTerm
 
 # Google Chrome
@@ -82,6 +86,7 @@ brew cask install google-chrome
 # Disable the all-too-sensitive backswipe
 defaults write com.google.Chrome AppleEnableSwipeNavigateWithScrolls -bool false
 #defaults write com.google.Chrome.canary AppleEnableSwipeNavigateWithScrolls -bool false
+sleep 1
 open -a "Google Chrome"
 
 
@@ -90,6 +95,7 @@ open -a "Google Chrome"
 # =============
 
 # brew cask install dropbox
+# sleep 1
 # open -a Dropbox
 
 
