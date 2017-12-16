@@ -20,6 +20,9 @@ setWindowTitle "loading..."
 # Keep more than 500 lines of history
 HISTSIZE=2048
 
+# Don't keep duplicate history lines or those starting with a space
+HISTCONTROL=ignoreboth
+
 # Use built-in python class to serve current directory over HTTP on port 8000
 # with UTF-8 encoding
 function serve() (
