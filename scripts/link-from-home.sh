@@ -16,8 +16,10 @@ original_relative_to_home_parent="$(python -c "import os.path; print os.path.rel
 if [ -h "${home_file}" ]; then
     current_path="$(readlink "${home_file}")"
     [ "${current_path}" = "${original_relative_to_home_parent}" ] || error "cannot link ${home_file} to ${original_relative_to_home_parent} because it is already linked to ${current_path}"
+    echo "${contentless_file} already linked"
 else
     ! [ -e "${home_file}" ] || error "${home_file} already exists but is not a symbolic link"
+    printf '\e[32m%s now being linked\e[0m\n' "${contentless_file}"
     mkdir -p "$(dirname "${home_file}")"
     ln -s "${original_relative_to_home_parent}" "${home_file}"
 fi
