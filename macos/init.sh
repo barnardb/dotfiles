@@ -136,4 +136,5 @@ brew install sbt
 brew install scala
 
 brew cask install intellij-idea-ce
+brew cask install virtualbox
 brew cask install vagrant
