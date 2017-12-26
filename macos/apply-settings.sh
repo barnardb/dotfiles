@@ -3,6 +3,15 @@ set -euo pipefail
 set -x
 
 
+# Languages & Locale
+# ------------------
+
+defaults write -globalDomain AppleLanguages -array en-DE en-CA en-GB de fr ja zh-Hans
+defaults write -globalDomain AppleLocale -string en_DE
+#defaults write /Library/Preferences/.GlobalPreferences Country "en_DE"
+#defaults write NSGlobalDomain AppleMeasurementUnits -string "Centimeters"
+#defaults write NSGlobalDomain AppleMetricUnits -bool true
+
 
 # Trackpad
 # ========
