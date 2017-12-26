@@ -31,7 +31,7 @@ defaults write NSGlobalDomain com.apple.mouse.tapBehavior -int 1
 defaults write NSGlobalDomain InitialKeyRepeat -int 10
 
 # Set a blazingly fast keyboard repeat rate
-defaults write NSGlobalDomain KeyRepeat -int 0
+defaults write NSGlobalDomain KeyRepeat -int 1
 
 # Enable full keyboard access for all controls
 # (e.g. enable Tab in modal dialogs)
