@@ -9,43 +9,77 @@ set -x
 defaults write -globalDomain AppleLanguages -array en-DE en-CA en-GB de fr ja zh-Hans
 defaults write -globalDomain AppleLocale -string en_DE
 #defaults write /Library/Preferences/.GlobalPreferences Country "en_DE"
-#defaults write NSGlobalDomain AppleMeasurementUnits -string "Centimeters"
-#defaults write NSGlobalDomain AppleMetricUnits -bool true
+#defaults write -globalDomain AppleMeasurementUnits -string "Centimeters"
+#defaults write -globalDomain AppleMetricUnits -bool true
+#defaults write -globalDomain AppleICUDateFormatStrings -dict-add "1" "y-MM-dd"
 
 
 # Trackpad
-# ========
+# --------
 
-defaults write com.apple.driver.AppleBluetoothMultitouch.trackpad Clicking -bool true
+# Enable tap-to-click
+defaults write -globalDomain com.apple.mouse.tapBehavior -int 1
+defaults write com.apple.AppleMultitouchTrackpad Clicking -bool true
 
-# Enable tap to click for this user and for the login screen
-defaults -currentHost write NSGlobalDomain com.apple.mouse.tapBehavior -int 1
-defaults write NSGlobalDomain com.apple.mouse.tapBehavior -int 1
-
+# Speed up pointer
+defaults write -globalDomain com.apple.trackpad.scaling -float 4.0
 
 
 # Keyboard
-# ========
+# --------
 
 # Set a very short keyboard repeat delay
-defaults write NSGlobalDomain InitialKeyRepeat -int 10
+defaults write -globalDomain InitialKeyRepeat -int 10
 
-# Set a blazingly fast keyboard repeat rate
-defaults write NSGlobalDomain KeyRepeat -int 1
+# Set a very fast keyboard repeat rate
+defaults write -globalDomain KeyRepeat -int 1
+
+# Make the F-keys work without holding <fn>, instead of as media control keys
+defaults write -globalDomain com.apple.keyboard.fnState -bool true
 
 # Enable full keyboard access for all controls
 # (e.g. enable Tab in modal dialogs)
-defaults write NSGlobalDomain AppleKeyboardUIMode -int 3
+defaults write -globalDomain AppleKeyboardUIMode -int 3
 
 
+# Menu Bar
+# --------
 
-# Operating System
-# ================
+defaults write com.apple.menuextra.battery ShowPercent -bool true
+defaults write com.apple.menuextra.clock DateFormat -string 'EEEEE d MMM  HH:mm'
+#defaults write com.apple.menuextra.clock FlashDateSeparators -bool false
+#defaults write com.apple.menuextra.clock IsAnalog -bool false
 
-# TODO: See datetimes like "Fri 15 Dec 16:29" in the status bar
+# Apply settings
+killall -SIGHUP SystemUIServer
+
+
+# Dock
+# ----
+
+# Smaller size
+defaults write com.apple.dock tilesize -int 48
+
+# Instant auto(un)hiding
+defaults write com.apple.dock autohide -bool true
+defaults write com.apple.dock autohide-delay -float 0
+defaults write com.apple.dock autohide-time-modifier -float 0
+
+# Wipe all (default) app icons from the Dock
+defaults write com.apple.dock persistent-apps -array
+
+# Speed up exposé (at least when accessed with the keyboard)
+defaults write com.apple.dock expose-animation-duration -float 0.05
+
+# Apply settings
+killall -SIGHUP Dock
+
+
+# Other OS Settings
+# -----------------
 
 # Require password immediately after sleep or screen saver begins
-defaults write com.apple.screensaver askForPassword -int 1
+defaults write com.apple.screensaver askForPassword -bool true
 defaults write com.apple.screensaver askForPasswordDelay -int 0
 
 # Set home directory as the default location for new Finder windows
@@ -68,12 +102,15 @@ defaults write com.apple.finder FXPreferredViewStyle -string "Nlsv"
 /usr/libexec/PlistBuddy -c "Set :StandardViewSettings:IconViewSettings:arrangeBy grid" ~/Library/Preferences/com.apple.finder.plist
 
 # Expand save panel by default
-defaults write NSGlobalDomain NSNavPanelExpandedStateForSaveMode -bool true
-defaults write NSGlobalDomain NSNavPanelExpandedStateForSaveMode2 -bool true
+defaults write -globalDomain NSNavPanelExpandedStateForSaveMode -bool true
+defaults write -globalDomain NSNavPanelExpandedStateForSaveMode2 -bool true
 
 # Expand print panel by default
-defaults write NSGlobalDomain PMPrintingExpandedStateForPrint -bool true
-defaults write NSGlobalDomain PMPrintingExpandedStateForPrint2 -bool true
+defaults write -globalDomain PMPrintingExpandedStateForPrint -bool true
+defaults write -globalDomain PMPrintingExpandedStateForPrint2 -bool true
 
-# Wipe all (default) app icons from the Dock
-defaults write com.apple.dock persistent-apps -array
+# Don't convert "--" to m/n-dash
+defaults write -globalDomain NSAutomaticDashSubstitutionEnabled -bool false
+
+# Speed up window resizing
+defaults write -globalDomain NSWindowResizeTime -float 0.001
