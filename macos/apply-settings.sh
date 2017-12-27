@@ -72,7 +72,7 @@ defaults write com.apple.dock persistent-apps -array
 defaults write com.apple.dock expose-animation-duration -float 0.05
 
 # Apply settings
-killall -SIGHUP Dock
+killall Dock
 
 
 # Other OS Settings
