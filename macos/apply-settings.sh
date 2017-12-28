@@ -50,6 +50,9 @@ defaults write com.apple.menuextra.clock DateFormat -string 'EEEEE d MMM  HH:mm'
 #defaults write com.apple.menuextra.clock FlashDateSeparators -bool false
 #defaults write com.apple.menuextra.clock IsAnalog -bool false
 
+# Add Bluetooth icon if not already present
+defaults read com.apple.systemuiserver menuExtras | grep -q '"/System/Library/CoreServices/Menu Extras/Bluetooth.menu"' || defaults write com.apple.systemuiserver menuExtras -array-add "/System/Library/CoreServices/Menu Extras/Bluetooth.menu"
+
 # Apply settings
 killall -SIGHUP SystemUIServer
 
