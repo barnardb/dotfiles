@@ -32,6 +32,8 @@
 	helper = osxkeychain
 [push]
 	default = upstream
+[rebase]
+	autosquash = true
 [user]
 	email = barnardb@gmail.com
 	name = Ben Barnard
