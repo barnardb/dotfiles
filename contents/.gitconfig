@@ -1,6 +1,8 @@
 [alias]
-	cap = commit --amend --patch --no-edit --no-verify
 	c = commit --verbose
+	ca = "!f() { if [ -n \"$(git status --porcelain)\" ]; then git commit --amend --no-edit --no-verify \"$@\"; else echo \"Nothing to do\" >&2; fi; }; f"
+	cap = ca --patch
+	cau = !git add --update && git ca
 	co = checkout
 	f = !"f() { if [ -d .git/svn ]; then git svn fetch \"$@\"; else git fetch \"$@\"; fi; }; f"
 	ignored = ls-files --other --ignored --exclude-standard
