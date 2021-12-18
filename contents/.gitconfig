@@ -4,15 +4,15 @@
 	cap = ca --patch
 	cau = !git add --update && git ca
 	co = checkout
-	f = !"f() { if [ -d .git/svn ]; then git svn fetch \"$@\"; else git fetch \"$@\"; fi; }; f"
+	f = fetch
 	ignored = ls-files --other --ignored --exclude-standard
 	ll = log --graph --abbrev-commit --decorate       --date=relative --format=format:'%C(bold blue)%h%C(reset) - %C(bold green)(%ar)%C(reset) %C(white)%s%C(reset) %C(dim white)- %an%C(reset)%C(bold yellow)%d%C(reset)' --all
 	lg = log --graph --abbrev-commit --decorate       --date=relative --format=format:'%C(bold blue)%h%C(reset) - %C(bold green)(%ar)%C(reset) %C(white)%s%C(reset) %C(dim white)- %an%C(reset)%C(bold yellow)%d%C(reset)' --all
 	lx = log --graph                 --decorate=short --color         --format=format:'%C(bold blue)%h%C(reset)+%C(bold black)(%cr)%C(reset)+%C(auto)%d%C(reset)++\n+++       %C(bold black)%an%C(reset)%C(bold black): %s%C(reset)' --all
 	lt = log --graph                 --decorate=short --color         --format=format:'%C(bold blue)%h%C(reset) %C(auto)%d%C(reset)\n         %C(bold black)[%cr]%C(reset)  %x09%C(bold black)%an: %s %C(reset)' --all
-	local = !"git log \"$([ -d .git/svn ] && echo git-svn || echo @{upstream})..\""
+	local = log @{upstream}..
 	new = ls-files --others --exclude-standard
-	pr = !"pr() { git_dir=$(git rev-parse --git-common-dir 2>/dev/null) && if [ -d \"${git_dir}/svn\" ]; then git svn fetch && git svn rebase; elif grep -q remote \"${git_dir}/config\"; then git pull --rebase \"$@\"; else echo 'No remote: nothing to do'; fi; }; pr"
+	pr = !"pr() { git_dir=$(git rev-parse --git-common-dir 2>/dev/null) && if grep -q remote \"${git_dir}/config\"; then git pull --rebase \"$@\"; else echo 'No remote: nothing to do'; fi; }; pr"
 	push-no-hook = !"pushNoHook() { if [ -e .git/hooks/pre-push ]; then mv .git/hooks/pre-push .git/hooks/pre-push-disabled-by-alias && { git push \"$@\"; mv .git/hooks/pre-push-disabled-by-alias .git/hooks/pre-push; } else git push \"$@\"; fi; }; pushNoHook"
 	r = rebase
 	rc = rebase --continue
@@ -20,7 +20,6 @@
 	s = status
 	serve = daemon --reuseaddr --verbose --base-path=. --export-all ./.git
 	st = status
-	svn-diff = !"TRACKING_BRANCH=$(git config --get svn-remote.svn.fetch | sed -e 's/.*:refs\\/remotes\\///'); REV=$(git svn find-rev $TRACKING_BRANCH); git diff --no-prefix $TRACKING_BRANCH \"$@\" | sed -e 's/^+++ .*/&\t(working copy)/' -e \"s/^--- .*/&\t(revision $REV)/\" -e 's/^diff --git [^[:space:]]*/Index:/' -e 's/^index.*/===================================================================/'"
 	with-stash = !"set -euo pipefail; changes=\"$(git status -z)\"; if [ -n \"${changes}\" ]; then echo 'Changes detected: stashing'; git stash; trap 'echo && echo Unstaging && git stash pop' EXIT; else echo 'No changes: proceeding without stash'; fi; echo;"
 [branch]
 	autosetuprebase = always
