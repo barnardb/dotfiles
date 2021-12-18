@@ -1,8 +1,3 @@
-
-# Have Homebrew use the global application directory instead of ~/Applications
-export HOMEBREW_CASK_OPTS="--appdir=/Applications"
-
-
 # Add homebrew sbin dir to PATH
 export PATH="$PATH:/usr/local/sbin"
 
