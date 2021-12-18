@@ -1,5 +1,2 @@
-# Add homebrew sbin dir to PATH
-export PATH="$PATH:/usr/local/sbin"
-
-# Add homebrew npm bin dir to PATH
-export PATH="$PATH:/usr/local/share/npm/bin"
+# Add homebrew directories to PATH and related variables
+eval "$(/usr/local/bin/brew shellenv)"
