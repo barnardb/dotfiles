@@ -2,9 +2,25 @@
 .DS_Store
 
 # IntelliJ
-.idea/
+/.idea/
+#/out/
 *.iml
 
 # VIM
 .*.swp
 .swp
+
+# Visual Studio Code
+/.vscode/
+
+# Bloop (Scala)
+/.bloop/
+
+# Metals, which VSCode seems to sometimes automatically start
+/.metals/
+
+# Files that I have in the working tree of shared repos which I don't want to check in
+bdib
+bdib.*
+bdib-*
+bdib_*
