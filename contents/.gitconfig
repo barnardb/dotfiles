@@ -21,6 +21,7 @@
 	s = status
 	serve = daemon --reuseaddr --verbose --base-path=. --export-all ./.git
 	st = status
+	sum = log --oneline --abbrev-commit origin/master..
 	with-stash = !"set -euo pipefail; changes=\"$(git status -z)\"; if [ -n \"${changes}\" ]; then echo 'Changes detected: stashing'; git stash; trap 'echo && echo Unstaging && git stash pop' EXIT; else echo 'No changes: proceeding without stash'; fi; echo;"
 [branch]
 	autosetuprebase = always
@@ -34,6 +35,8 @@
 	helper = osxkeychain
 [fetch]
 	prune = true
+[init]
+	defaultBranch = main
 [push]
 	default = upstream
 [rebase]
@@ -41,5 +44,3 @@
 [user]
 	email = barnardb@gmail.com
 	name = Ben Barnard
-[init]
-	defaultBranch = main
