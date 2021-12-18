@@ -2,7 +2,6 @@ shopt -s autocd
 shopt -s checkjobs
 shopt -s checkwinsize
 shopt -s dirspell
-shopt -s histappend
 shopt -s no_empty_cmd_completion
 
 function setWindowTitle {
@@ -17,11 +16,28 @@ function setWindowTitle {
 }
 setWindowTitle "loading..."
 
-# Keep more than 500 lines of history
-HISTSIZE=2048
+
+# Keep more than 500 lines of history in memory
+HISTSIZE=UNLIMITED  # could also do 100000
+
+# Keep more than 500 lines of history on disk
+HISTFILESIZE=UNLIMITED  # could also do 100000
+
+# Use a non-default history file; this is a safeguard to prevent the history from being truncated if bash is ever loaded without this configuration
+HISTFILE=~/.bash_history_unlimited
+
+# Append to the history file instead of overwriting it
+shopt -s histappend
 
 # Don't keep duplicate history lines or those starting with a space
 HISTCONTROL=ignoreboth
+
+# Don't record the history command in the history
+HISTIGNORE='history'
+
+# Set a time format for the history command to use when showing history
+HISTTIMEFORMAT='%F %T '
+
 
 # Use built-in python class to serve current directory over HTTP on port 8000
 # with UTF-8 encoding
