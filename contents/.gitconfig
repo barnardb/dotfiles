@@ -30,6 +30,8 @@
 	quotepath = false
 [credential]
 	helper = osxkeychain
+[fetch]
+	prune = true
 [push]
 	default = upstream
 [rebase]
@@ -37,3 +39,5 @@
 [user]
 	email = barnardb@gmail.com
 	name = Ben Barnard
+[init]
+	defaultBranch = main
