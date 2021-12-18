@@ -6,10 +6,6 @@ export PATH="$PATH:$HOME/personal/dotfiles/utilities"
 export PATH="$PATH:$HOME/personal/devaut/src/main/bash"
 
 
-# Prevent less from storing state in a home directory dot-file
-export LESSHISTFILE=/dev/null
-
-
 # Use vim
 export EDITOR=vim
 
