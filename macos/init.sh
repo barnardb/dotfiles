@@ -42,6 +42,11 @@ echo "Applying Mac OS settings"
 # General UI
 # ==========
 
+# Karabiner-Elements (to turn the caps lock key into something useful)
+brew install karabiner-elements
+sleep 1
+open -a Karabiner-Elements
+
 # Flux
 brew cask install flux
 sleep 1
