@@ -57,12 +57,6 @@ brew cask install flux
 sleep 1
 open -a Flux
 
-# Spectacle
-brew cask install Spectacle
-# TODO: restore spectacle settings
-sleep 1
-open -a Spectacle
-
 # Caffeine
 brew cask install caffeine
 sleep 1
