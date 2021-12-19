@@ -25,8 +25,7 @@ done
 
 [ $# -eq 0 ] || usage_error "expected 0 arguments, got $#"
 
-scripts_dir="$(dirname "$0")"
-scripts_dir="$(realpath "${scripts_dir}")"
+scripts_dir="$(cd "$(dirname "$0")" && pwd)"
 
 for directory in ~/*/dotfiles/; do
     echo "Refreshing ${directory}"
