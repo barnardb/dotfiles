@@ -50,14 +50,14 @@ sleep 1
 open -a hammerspoon
 
 # Flux
-brew install flux
-sleep 1
-open -a Flux
+# brew install flux
+# sleep 1
+# open -a Flux
 
 # Caffeine
-brew install caffeine
-sleep 1
-open -a Caffeine
+# brew install caffeine
+# sleep 1
+# open -a Caffeine
 
 
 
