@@ -37,6 +37,8 @@
 	helper = osxkeychain
 [fetch]
 	prune = true
+[includeIf "gitdir:~/flink/"]
+	path = ~/flink/.gitconfig
 [init]
 	defaultBranch = main
 [push]
