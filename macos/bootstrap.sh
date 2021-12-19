@@ -12,12 +12,12 @@ read -er -p "Give this computer a name [${computer_name}]: "
 }
 
 # SSH Key
-[ -f ~/.ssh/id_rsa ] || {
+[ -f ~/.ssh/id_ed25519 ] || [ -f ~/.ssh/id_rsa ] || {
     echo "SSH key not found. Let's generate one and upload it to GitHub."
     read -er -p "GitHub username [$USER]: "
     [ -n "$REPLY" ] || REPLY="$USER"
-    ssh-keygen -t rsa -b 4096 -f ~/.ssh/id_rsa
-    curl --fail --include --user "$REPLY" -p -d "{\"title\":\"$USER@${computer_name}\", \"key\":\"$(cat ~/.ssh/id_rsa.pub)\"}" https://api.github.com/user/keys
+    ssh-keygen -t ed25519 -f ~/.ssh/id_ed25519
+    curl --fail --include --user "$REPLY" -p -d "{\"title\":\"$USER@${computer_name}\", \"key\":\"$(cat ~/.ssh/id_ed25519.pub)\"}" https://api.github.com/user/keys
 }
 
 # Homebrew
