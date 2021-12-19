@@ -13,8 +13,8 @@
 	local = log @{upstream}..
 	new = ls-files --others --exclude-standard
 	pf = push --force-with-lease
-	pr = !"pr() { git_dir=$(git rev-parse --git-common-dir 2>/dev/null) && if grep -q remote \"${git_dir}/config\"; then git pull --rebase \"$@\"; else echo 'No remote: nothing to do'; fi; }; pr"
-	push-no-hook = !"pushNoHook() { if [ -e .git/hooks/pre-push ]; then mv .git/hooks/pre-push .git/hooks/pre-push-disabled-by-alias && { git push \"$@\"; mv .git/hooks/pre-push-disabled-by-alias .git/hooks/pre-push; } else git push \"$@\"; fi; }; pushNoHook"
+	pr = "!pr() { git_dir=$(git rev-parse --git-common-dir 2>/dev/null) && if grep -q remote \"${git_dir}/config\"; then git pull --rebase \"$@\"; else echo 'No remote: nothing to do'; fi; }; pr"
+	push-no-hook = "!pushNoHook() { if [ -e .git/hooks/pre-push ]; then mv .git/hooks/pre-push .git/hooks/pre-push-disabled-by-alias && { git push \"$@\"; mv .git/hooks/pre-push-disabled-by-alias .git/hooks/pre-push; } else git push \"$@\"; fi; }; pushNoHook"
 	r = rebase
 	rc = rebase --continue
 	ri = rebase --interactive
@@ -22,7 +22,7 @@
 	serve = daemon --reuseaddr --verbose --base-path=. --export-all ./.git
 	st = status
 	sum = log --oneline --abbrev-commit origin/master..
-	with-stash = !"set -euo pipefail; changes=\"$(git status -z)\"; if [ -n \"${changes}\" ]; then echo 'Changes detected: stashing'; git stash; trap 'echo && echo Unstaging && git stash pop' EXIT; else echo 'No changes: proceeding without stash'; fi; echo;"
+	with-stash = "!set -euo pipefail; changes=\"$(git status -z)\"; if [ -n \"${changes}\" ]; then echo 'Changes detected: stashing'; git stash; trap 'echo && echo Unstaging && git stash pop' EXIT; else echo 'No changes: proceeding without stash'; fi; echo;"
 [branch]
 	autosetuprebase = always
 [color]
