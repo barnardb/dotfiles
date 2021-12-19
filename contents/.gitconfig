@@ -17,6 +17,7 @@
 	push-no-hook = "!pushNoHook() { if [ -e .git/hooks/pre-push ]; then mv .git/hooks/pre-push .git/hooks/pre-push-disabled-by-alias && { git push \"$@\"; mv .git/hooks/pre-push-disabled-by-alias .git/hooks/pre-push; } else git push \"$@\"; fi; }; pushNoHook"
 	r = rebase
 	rc = rebase --continue
+	restash = "!restash() { [ $# -eq 1 ] && git update-ref -m "$(git log -1 --pretty=format:'%s' $1)" refs/stash $1; }; restash"
 	ri = rebase --interactive
 	s = status
 	serve = daemon --reuseaddr --verbose --base-path=. --export-all ./.git
