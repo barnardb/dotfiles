@@ -25,10 +25,6 @@ done 2>/dev/null &
 
 # We assume that tools set up in bootstrap.sh are already in place
 
-# Homebrew Cask
-brew tap caskroom/cask
-brew cask doctor
-
 
 
 # MacOS Settings
@@ -54,12 +50,12 @@ sleep 1
 open -a hammerspoon
 
 # Flux
-brew cask install flux
+brew install flux
 sleep 1
 open -a Flux
 
 # Caffeine
-brew cask install caffeine
+brew install caffeine
 sleep 1
 open -a Caffeine
 
@@ -82,12 +78,12 @@ grep -q "# Shells installed by Homebrew" /etc/shells || {
 sudo chsh -s /usr/local/bin/bash "$USER"
 
 # ITerm2
-brew cask install iterm2
+brew install iterm2
 sleep 1
 open -a iTerm
 
 # Google Chrome
-brew cask install google-chrome
+brew install google-chrome
 # Disable the all-too-sensitive backswipe
 defaults write com.google.Chrome AppleEnableSwipeNavigateWithScrolls -bool false
 #defaults write com.google.Chrome.canary AppleEnableSwipeNavigateWithScrolls -bool false
@@ -99,7 +95,7 @@ open -a "Google Chrome"
 # Cloud Storage
 # =============
 
-# brew cask install dropbox
+# brew install dropbox
 # sleep 1
 # open -a Dropbox
 
@@ -108,11 +104,11 @@ open -a "Google Chrome"
 # Applications
 # ============
 
-brew cask install firefox
-brew cask install skype
-brew cask install slack
-brew cask install vlc
-brew cask install whatsapp
+brew install firefox
+brew install skype
+brew install slack
+brew install vlc
+brew install whatsapp
 
 
 
@@ -136,10 +132,10 @@ brew install graphviz
 brew install node.js
 brew install rust
 
-brew cask install java
+brew install java
 brew install sbt
 brew install scala
 
-brew cask install intellij-idea-ce
-brew cask install virtualbox
-brew cask install vagrant
+brew install intellij-idea-ce
+brew install virtualbox
+brew install vagrant
