@@ -34,8 +34,9 @@ brew cask doctor
 # MacOS Settings
 # ==============
 
-echo "Applying Mac OS settings"
-"$(dirname "$0")/apply-settings.sh"
+# Disabled for now: not sure if this is a good way to set these things; it may be better to go through the UI
+# echo "Applying Mac OS settings"
+# "$(dirname "$0")/apply-settings.sh"
 
 
 
