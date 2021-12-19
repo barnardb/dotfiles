@@ -47,6 +47,11 @@ brew install karabiner-elements
 sleep 1
 open -a Karabiner-Elements
 
+# Hammerspoon (for all manner of shortcuts, including window management, and things using the re-mapped caps lock key)
+brew install hammerspoon
+sleep 1
+open -a hammerspoon
+
 # Flux
 brew cask install flux
 sleep 1
