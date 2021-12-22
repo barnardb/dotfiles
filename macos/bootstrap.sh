@@ -31,7 +31,7 @@ gh auth login --hostname github.com  # The login / setup process prompts to uplo
 # Clone dotfiles repo
 mkdir -p ~/personal
 cd ~/personal
--d dotfiles/.git || git clone git@github.com:barnardb/dotfiles.git
+[ -d dotfiles/.git ] || git clone git@github.com:barnardb/dotfiles.git
 
 # Run init script
 cd dotfiles
