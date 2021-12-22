@@ -35,4 +35,5 @@ cd ~/personal
 
 # Run init script
 cd dotfiles
+./scripts/refresh-working-dir.sh
 exec ./macos/init.sh
