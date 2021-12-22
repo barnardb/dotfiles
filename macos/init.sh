@@ -40,22 +40,25 @@ done 2>/dev/null &
 # ==========
 
 # Karabiner-Elements (to turn the caps lock key into something useful)
-brew install karabiner-elements
+brew install --cask karabiner-elements
 sleep 1
 open -a Karabiner-Elements
 
 # Hammerspoon (for all manner of shortcuts, including window management, and things using the re-mapped caps lock key)
-brew install hammerspoon
+brew install --cask hammerspoon
 sleep 1
 open -a hammerspoon
 
+# Disabled for now: I'd like to try things without useing Flux for a while and see how it goes.
 # Flux
-# brew install flux
+# brew install --cask flux
 # sleep 1
 # open -a Flux
 
+# Disabled for now: I'd like to try things without useing Caffeine for a while and see how it goes.
+#                   Also, it might make sense to use hammerspoon if I do decide to go for this behaviour again.
 # Caffeine
-# brew install caffeine
+# brew install --cask caffeine
 # sleep 1
 # open -a Caffeine
 
@@ -78,44 +81,47 @@ grep -q "# Shells installed by Homebrew" /etc/shells || {
 sudo chsh -s /usr/local/bin/bash "$USER"
 
 # ITerm2
-brew install iterm2
+brew install --cask iterm2
 sleep 1
 open -a iTerm
 
 # Google Chrome
-brew install google-chrome
-# Disable the all-too-sensitive backswipe
-defaults write com.google.Chrome AppleEnableSwipeNavigateWithScrolls -bool false
-#defaults write com.google.Chrome.canary AppleEnableSwipeNavigateWithScrolls -bool false
+brew install --cask google-chrome
+defaults write com.google.Chrome AppleEnableSwipeNavigateWithScrolls -bool false  # Disable the all-too-sensitive backswipe
 sleep 1
 open -a "Google Chrome"
 
 
 
-# Cloud Storage
-# =============
+# Applications With Accounts
+# ==========================
 
-# brew install dropbox
-# sleep 1
-# open -a Dropbox
+brew install --cask slack
+sleep 1
+open -a Slack
+
+brew install --cask signal
+sleep 1
+open -a Signal
+
+brew install --cask dropbox
+sleep 1
+open -a Dropbox
 
 
 
 # Applications
 # ============
 
-brew install firefox
-brew install skype
-brew install slack
 brew install vlc
-brew install whatsapp
 
 
 
 # Shell Utilities
 # ===============
 
-brew install httpie
+brew install curl
+brew install jq
 brew install parallel
 brew install tree
 brew install wget
@@ -126,16 +132,14 @@ brew install wget
 # ====================
 
 brew install cloc
-brew install docker
-brew install golang
+brew install --cask docker
+brew install go
 brew install graphviz
-brew install node.js
-brew install rust
+brew install node
 
-brew install java
+# brew install java
 brew install sbt
-brew install scala
+# brew install scala
 
-brew install intellij-idea-ce
-brew install virtualbox
-brew install vagrant
+brew install --cask intellij-idea-ce
+brew install --cask visual-studio-code
