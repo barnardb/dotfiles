@@ -14,7 +14,7 @@
 	new = ls-files --others --exclude-standard
 	pf = push --force-with-lease
 	pr = "!pr() { git_dir=$(git rev-parse --git-common-dir 2>/dev/null) && if grep -q remote \"${git_dir}/config\"; then git pull --rebase \"$@\"; else echo 'No remote: nothing to do'; fi; }; pr"
-	publish = "!set -x && [ $# -gt 0 ] && [ ${1:0:1} != - ] && branch=$1 && shift || branch=$(git rev-parse --abbrev-ref HEAD) && [ ${branch} != master ] || branch=$(git log origin/master.. --pretty=format:%s | tail -1 | sed -E s/[^a-zA-Z0-9_-]+/-/g) && git branch -m ${branch} && git push -u origin HEAD:${branch} && hub pull-request --no-edit \"$@\" && git checkout master && git branch -d ${branch} && true"
+	publish = "!set -x && [ $# -gt 0 ] && [ ${1:0:1} != - ] && branch=$1 && shift || branch=$(git rev-parse --abbrev-ref HEAD) && [ ${branch} != main ] || branch=$(git log origin/main.. --pretty=format:%s | tail -1 | sed -E s/[^a-zA-Z0-9_-]+/-/g) && git branch -m ${branch} && git push -u origin HEAD:${branch} && hub pull-request --no-edit \"$@\" && git checkout main && git branch -d ${branch} && true"
 	push-no-hook = "!pushNoHook() { if [ -e .git/hooks/pre-push ]; then mv .git/hooks/pre-push .git/hooks/pre-push-disabled-by-alias && { git push \"$@\"; mv .git/hooks/pre-push-disabled-by-alias .git/hooks/pre-push; } else git push \"$@\"; fi; }; pushNoHook"
 	r = rebase
 	rc = rebase --continue
@@ -23,7 +23,7 @@
 	s = status
 	serve = daemon --reuseaddr --verbose --base-path=. --export-all ./.git
 	st = status
-	sum = log --oneline --abbrev-commit origin/master..
+	sum = log --oneline --abbrev-commit origin/main..
 	with-stash = "!set -euo pipefail; changes=\"$(git status -z)\"; if [ -n \"${changes}\" ]; then echo 'Changes detected: stashing'; git stash; trap 'echo && echo Unstaging && git stash pop' EXIT; else echo 'No changes: proceeding without stash'; fi; echo;"
 [branch]
 	autosetuprebase = always
