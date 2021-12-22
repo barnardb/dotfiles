@@ -11,15 +11,6 @@ read -er -p "Give this computer a name [${computer_name}]: "
     sudo systemsetup -setlocalsubnetname "${computer_name}"
 }
 
-# SSH Key
-[ -f ~/.ssh/id_ed25519 ] || [ -f ~/.ssh/id_rsa ] || {
-    echo "SSH key not found. Let's generate one and upload it to GitHub."
-    read -er -p "GitHub username [$USER]: "
-    [ -n "$REPLY" ] || REPLY="$USER"
-    ssh-keygen -t ed25519 -f ~/.ssh/id_ed25519
-    curl --fail --include --user "$REPLY" -p -d "{\"title\":\"$USER@${computer_name}\", \"key\":\"$(cat ~/.ssh/id_ed25519.pub)\"}" https://api.github.com/user/keys
-}
-
 # Homebrew
 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 brew doctor
@@ -27,6 +18,15 @@ brew doctor
 # Up-to-date git
 brew install git
 hash -r  # make the current shell forget old executable locations, so it finds new git
+
+# SSH Key
+[ -f ~/.ssh/id_ed25519 ] || [ -f ~/.ssh/id_rsa ] || {
+    echo "SSH key not found. Generating one…"
+    ssh-keygen -t ed25519 -f ~/.ssh/id_ed25519
+}
+
+brew install gh
+gh auth login --hostname github.com  # The login / setup process prompts to upload an SSH key
 
 # Clone dotfiles repo
 mkdir -p ~/personal
