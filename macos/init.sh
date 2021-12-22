@@ -41,25 +41,25 @@ done 2>/dev/null &
 
 # Karabiner-Elements (to turn the caps lock key into something useful)
 brew install --cask karabiner-elements
-sleep 2
+sleep 3
 open -a Karabiner-Elements
 
 # Hammerspoon (for all manner of shortcuts, including window management, and things using the re-mapped caps lock key)
 brew install --cask hammerspoon
-sleep 2
+sleep 3
 open -a hammerspoon
 
 # Disabled for now: I'd like to try things without useing Flux for a while and see how it goes.
 # Flux
 # brew install --cask flux
-# sleep 2
+# sleep 3
 # open -a Flux
 
 # Disabled for now: I'd like to try things without useing Caffeine for a while and see how it goes.
 #                   Also, it might make sense to use hammerspoon if I do decide to go for this behaviour again.
 # Caffeine
 # brew install --cask caffeine
-# sleep 2
+# sleep 3
 # open -a Caffeine
 
 
@@ -82,13 +82,13 @@ sudo chsh -s /usr/local/bin/bash "$USER"
 
 # ITerm2
 brew install --cask iterm2
-sleep 2
+sleep 3
 open -a iTerm
 
 # Google Chrome
 brew install --cask google-chrome
 defaults write com.google.Chrome AppleEnableSwipeNavigateWithScrolls -bool false  # Disable the all-too-sensitive backswipe
-sleep 2
+sleep 3
 open -a "Google Chrome"
 
 
@@ -97,15 +97,15 @@ open -a "Google Chrome"
 # ==========================
 
 brew install --cask slack
-sleep 2
+sleep 3
 open -a Slack
 
 brew install --cask signal
-sleep 2
+sleep 3
 open -a Signal
 
 brew install --cask dropbox
-sleep 2
+sleep 3
 open -a Dropbox
 
 
