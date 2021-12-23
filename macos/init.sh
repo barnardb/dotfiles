@@ -128,4 +128,8 @@ brew install --cask vlc
 brew install go
 brew install node
 brew install --cask docker
+
+brew install openjdk
+sudo ln -sfn /opt/homebrew/opt/openjdk/libexec/openjdk.jdk /Library/Java/JavaVirtualMachines/openjdk.jdk # allow MacOS java wrappers to find this JDK
+
 brew install sbt
