@@ -110,36 +110,22 @@ open -a Dropbox
 
 
 
-# Applications
-# ============
+# Editors
+# =======
 
-brew install vlc
-
-
-
-# Shell Utilities
-# ===============
-
-brew install curl
-brew install jq
-brew install parallel
-brew install tree
-brew install wget
-
-
-
-# Software Development
-# ====================
-
-brew install cloc
-brew install --cask docker
-brew install go
-brew install graphviz
-brew install node
-
-# brew install java
-brew install sbt
-# brew install scala
-
-brew install --cask intellij-idea-ce
 brew install --cask visual-studio-code
+brew install --cask intellij-idea-ce
+
+
+
+# Additonal packages, by size and urgency
+# =======================================
+
+brew install parallel
+brew install jq
+brew install graphviz
+brew install --cask vlc
+brew install go
+brew install node
+brew install --cask docker
+brew install sbt
