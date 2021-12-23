@@ -11,32 +11,29 @@ cd -
 echo
 
 echo "Checking for brew updates"
-brew up --rebase
-echo "Checking in with the brew doctor"
-if [ -f ~/.accepted-brew-doctor-output ]; then
-    diff ~/.accepted-brew-doctor-output <(brew doctor 2>&1)
-else
-    brew doctor
-fi
+brew up
+
+brew_doctor() {
+    echo "Checking in with the brew doctor"
+    if [ -f ~/.accepted-brew-doctor-output ]; then
+        diff ~/.accepted-brew-doctor-output <(brew doctor 2>&1)
+    else
+        brew doctor
+    fi
+}
+brew_doctor
+
 outdated="$(brew outdated)"
 if [ -n "${outdated}" ]; then
     echo
     echo "Outdated packages:"
     brew outdated
-    read -p "Upgrade these packages? "
-    if [ "${REPLY}" = "yes" ] || [ "${REPLY}" = "y" ] || [ "${REPLY}" = "" ]; then
-        brew upgrade
-    fi
+    brew upgrade
+    brew_doctor
 fi
 
-echo "Checking in with the brew cask doctor"
-brew cask doctor
-
-echo "Cleaning up brew"
-brew cleanup --scrub
-
-echo "Cleaning up brew cask"
-brew cask cleanup
+echo "Fully removing the brew cache"
+rm -rf "$(brew --cache)"  # as specified by `brew cleanup --help`
 
 # echo "Updating cabal"
 # cabal update
