@@ -24,12 +24,16 @@ withCapslock:bind({}, 's', function() hs.application.launchOrFocus('Slack'); end
 -- I used to first Spectacle and then Rectangle for window management.
 -- But hammerspoon allows much more fine grained configuration, such as only using part of the screen.
 
--- Intercept Rectangle's keybindings, making them not use the lower part of the screen to accomodate my dying display
+-- Implement Rectangle-like keybindings, making them not use the lower part of the screen on my dying display
 function bindRectangleStyleHotkey(key, x, y, w, h)
   hs.hotkey.bind({"alt", "ctrl"}, key, function()
     local window = hs.window.focusedWindow()
-    local frame = window:screen():frame()
-    frame.h = frame.h - 100
+    local screen = window:screen()
+    local frame = screen:frame()
+    -- Adjust the target frame on my dying display
+    if screen:getUUID() == "32F2E954-D2E1-3576-CA36-38E2A5885165" then
+      frame.h = frame.h - 100
+    end
     window:setFrame(hs.geometry(x, y, w, h):fromUnitRect(frame), 0)
   end)
 end
