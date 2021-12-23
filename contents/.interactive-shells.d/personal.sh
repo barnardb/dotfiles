@@ -17,3 +17,23 @@ export CLICOLOR=1
 alias l="ls"
 alias la='ls -a'
 alias ll='ls -la'
+
+
+# Making it easier to move up in the world
+alias -- ..='cd ..'
+alias -- ...='.. && ..'
+alias -- ....='... && ..'
+alias -- .....='.... && ..'
+alias -- ......='..... && ..'
+alias -- .......='...... && ..'
+alias -- ........='....... && ..'
+
+
+# Cause . without args to print the working directory instead of an error
+function . {
+    if [ $# = 0 ]; then
+        pwd
+    else
+        builtin . "$@"
+    fi
+}

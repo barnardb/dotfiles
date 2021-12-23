@@ -51,26 +51,8 @@ function serve() (
     python -c "import SimpleHTTPServer; m = SimpleHTTPServer.SimpleHTTPRequestHandler.extensions_map; m[''] = 'text/plain'; m.update(dict([(k, v + ';charset=UTF-8') for k, v in m.items()])); SimpleHTTPServer.test();"
 )
 
-# Making it easier to move up in the world
-alias -- ..='cd ..'
-alias -- ...='.. && ..'
-alias -- ....='... && ..'
-alias -- .....='.... && ..'
-alias -- ......='..... && ..'
-alias -- .......='...... && ..'
-alias -- ........='....... && ..'
-
 # Have tree output Unicode characters properly
 alias tree="tree -N"
-
-# Cause . without args to print the working directory instead of an error
-function . {
-    if [ $# = 0 ]; then
-        pwd
-    else
-        builtin . "$@"
-    fi
-}
 
 # Announce exit status of the current or previous command
 function announce {
