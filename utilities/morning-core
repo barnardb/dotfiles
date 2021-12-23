@@ -5,7 +5,7 @@ echo "Getting your weather forcast"
 weather
 
 echo "Getting your upcoming events"
-cd "$HOME/psg/pony-calendar"
+cd "$HOME/open-source/programmiersportgruppe/pony-calendar"
     bundle exec ./pony-calendar.rb
 cd -
 echo
