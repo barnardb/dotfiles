@@ -33,6 +33,7 @@ password() {
 }
 
 display_password() {
+  printf "Password: " >&2
   password=$(password "$1")
   printf "${password}"
   echo >&2
@@ -53,16 +54,21 @@ elif [ "$1" = --password ] && [ $# -eq 1 ]; then
   echo "SSID:     ${ssid}" >&2
   link_auth="$(info_field "${info}" "link auth")"
   case "${link_auth}" in
-    wpa2-psk)
-      printf "Password: " >&2
-      display_password "${ssid}" WPA;;
+    wpa2-psk) display_password "${ssid}" WPA;;
     *)
       echo "Don't know what type of security to embed in QR code for link auth: ${link_auth}" >&2
-      printf "Password: " >&2
       display_password "${ssid}"
   esac
 elif [ "$1" = --password ] && [ $# -eq 2 ]; then
-  display_password "$2"
+  ssid="$2"
+  # Use an undocumented plist to get the security type
+  SupportedSecurityTypes=$(sudo /usr/libexec/PlistBuddy -c "$(printf 'print %q' "wifi.network.ssid.${ssid}:SupportedSecurityTypes")" /Library/Preferences/com.apple.wifi.known-networks.plist)
+  case "${SupportedSecurityTypes}" in
+    'WPA/WPA2 Personal') display_password "${ssid}" WPA;;
+    *)
+      echo "Don't know what type of security to embed in QR code for SupportedSecurityTypes: ${link_auth}" >&2
+      display_password "${ssid}"
+  esac
 else
   echo "usage: $0 [--password [<ssid>]]" >&2
   exit 2
