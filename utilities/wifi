@@ -1,0 +1,69 @@
+#!/bin/bash
+set -euo pipefail
+
+mecode_style_encode() {
+  output="$1:"
+  shift
+  while [ $# -ge 2 ]; do
+    output="${output}$1:$(echo "$2" | sed -E 's/([\;,":])/\\\1/g');"
+    shift 2
+  done
+  echo "${output};"
+}
+
+qrcode() {
+  # See https://github.com/zxing/zxing/wiki/Barcode-Contents#wi-fi-network-config-android-ios-11
+  ssid="$1"
+  type="$2" # WPA | WEP
+  password="$3"
+  data=$(mecode_style_encode WIFI S "${ssid}" T "${type}" P "${password}")
+  qrencode -t ANSIUTF8 "${data}"
+}
+
+info() {
+  /System/Library/PrivateFrameworks/Apple80211.framework/Versions/Current/Resources/airport --getinfo
+}
+
+info_field() {
+  echo "$1" | sed -n "s/ *$2: //p"
+}
+
+password() {
+  security find-generic-password -s AirPort -w -a "$1"
+}
+
+display_password() {
+  password=$(password "$1")
+  printf "${password}"
+  echo >&2
+  if [ -t 1 ]; then
+    if [ $# -eq 2 ] && hash qrencode; then
+      qrcode "$1" "$2" "${password}"
+    fi
+    printf "${password}" | pbcopy
+  fi
+}
+
+if [ $# -eq 0 ]; then
+  info=$(info)
+  info_field "${info}" SSID
+elif [ "$1" = --password ] && [ $# -eq 1 ]; then
+  info=$(info)
+  ssid=$(info_field "${info}" SSID)
+  echo "SSID:     ${ssid}" >&2
+  link_auth="$(info_field "${info}" "link auth")"
+  case "${link_auth}" in
+    wpa2-psk)
+      printf "Password: " >&2
+      display_password "${ssid}" WPA;;
+    *)
+      echo "Don't know what type of security to embed in QR code for link auth: ${link_auth}" >&2
+      printf "Password: " >&2
+      display_password "${ssid}"
+  esac
+elif [ "$1" = --password ] && [ $# -eq 2 ]; then
+  display_password "$2"
+else
+  echo "usage: $0 [--password [<ssid>]]" >&2
+  exit 2
+fi
