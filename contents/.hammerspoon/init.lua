@@ -43,6 +43,10 @@ bindRectangleStyleHotkey("right", 0.5, 0, 0.5, 1) -- right half
 bindRectangleStyleHotkey("up", 0, 0, 1, 0.5) -- top half
 bindRectangleStyleHotkey("down", 0, 0.5, 1, 1) -- bottom half
 
+withCapslock:bind({}, "left", function() hs.window.filter.default:focusWindowWest(nil, true); end)
+withCapslock:bind({}, "right", function() hs.window.filter.default:focusWindowEast(nil, true); end)
+withCapslock:bind({}, "up", function() hs.window.filter.default:focusWindowNorth(nil, true); end)
+withCapslock:bind({}, "down", function() hs.window.filter.default:focusWindowSouth(nil, true); end)
 
 -- playTap = hs.eventtap.new({hs.eventtap.event.types.systemDefined}, function(event)
 --   local data = event:systemKey()
