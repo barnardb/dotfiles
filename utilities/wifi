@@ -33,8 +33,13 @@ password() {
 }
 
 display_password() {
+  if [ $# -eq 2 ]; then
+    echo "Security: $2"
+  fi
   printf "Password: " >&2
-  password=$(password "$1")
+  password=$(password "$1") || {
+    exit 1
+  }
   printf "${password}"
   echo >&2
   if [ -t 1 ]; then
