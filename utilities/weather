@@ -1,5 +1,5 @@
 #!/bin/sh
 set -euo pipefail
 
-imgcat http://wetterstationen.meteomedia.de/messnetz/vorhersagegrafik/103940.png
-exec imgcat http://www.dwd.de/DWD/wetter/radar/rad_bbb_akt.jpg
+imgcat --height 32 https://wetterstationen.meteomedia.de/messnetz/vorhersagegrafik/103940.png
+exec imgcat --height 18 https://www.dwd.de/DWD/wetter/radar/rad_bbb_akt.jpg
