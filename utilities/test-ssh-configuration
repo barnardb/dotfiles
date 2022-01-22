@@ -1,14 +1,14 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-[ $# -eq 1 ] || {
-    echo "usage: $0 <ssh-config-file-section-name>"
-    exit 1
-} >&2
+case $# in
+    0) range_args=();;
+    1) range_args=(-e "1,/#### $1/d" -e '/####/,$d');;
+    *) echo "usage: $0 [<ssh-config-file-section-name>]" >&2; exit 1
+esac
 
 hosts="$(sed -nE \
-    -e "1,/#### $1/d" \
-    -e '/####/,$d' \
+    "${range_args[@]}" \
     -e "s/^Host //p" \
     ~/.ssh/config \
     | tr ' ' '\n')"
